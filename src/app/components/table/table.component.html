@@ -1,0 +1,28 @@
+<div class="page">
+  <h1 align="center"> Addresses </h1>
+  <div class="table">
+    <div class="headers">
+      <p *ngFor="let header of headers" class="header" > 
+        {{header.name}} <img src="./assets/back.png" class="down"
+        [ngClass]="{'rotated': header.sorting} "
+        (click)="sort(header)" />
+      </p>
+    </div>
+    <div class="data" *ngFor="let a of response?.data | sort: order : column">
+      <app-item [address]="a"></app-item>
+    </div>
+    <div class="paginator">
+      <button class="paginator-element" [disabled]="page === 0"
+      (click)="passPage(- 1)">
+        <img src="./assets/back.png" height="40px" width="auto"/>
+      </button>
+      <div class="paginator-element">
+        <h2 > Page {{page + 1}} of {{ response?.size / 10 }} </h2>
+      </div>
+      <button class="paginator-element" [disabled]="page === response?.size / 10 - 1"
+      (click)="passPage( 1)" >
+        <img src="./assets/next.png" height="40px" width="auto"/>
+      </button>
+    </div>
+  </div>
+</div>
